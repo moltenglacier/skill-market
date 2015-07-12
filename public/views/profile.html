@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class='col-md-4 col-md-offset-1'>
+      <img class="th" src="http://placehold.it/300x300">
+      <h2>{{user.name}}</h1>
+      <h4>{{user.email}}</h3>
+    </div>
+    <div class='col-md-6'>
+      <h3>Transactions</h3>
+      <table class="table table-hover">
+        <thead>
+          <th>Person</th>
+          <th>Give</th>
+          <th>Take</th>
+          <th>Time</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="deal in user.transactions">
+            <th>{{deal.person}}</th>
+            <th>{{deal.swapGive}}</th>
+            <th>{{deal.swapTake}}</th>
+            <th>{{deal.time}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

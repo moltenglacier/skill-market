@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="skill">
+  <head>
+    <title>Skill Swap</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/paper/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div ng-controller="NavCtrl">
+        <!-- Navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="navbar-header">
+            <h3><a ui-sref="market" id="logo">Skill Swap</a></h3>
+          </div>
+          <ul class="nav navbar-nav navbar-right" id="nav-links">
+            <li><a ui-sref="profile({ id: profile._id })" ng-show="user">Profile</a></li>
+            <li><a data-toggle="modal" data-target="#post">Post</a></li>
+            <li><a ng-hide="user" data-toggle="modal" data-target="#login">Login</a></li>
+            <li><a ng-show="user" ng-click="logout()">Logout</a></li>
+          </ul>
+        </nav>
+        <!-- Login Modal -->
+        <div class="modal fade" id="login" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Login</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-group">
+                  <input type="text" class="form-control" placeholder="Email" ng-model="login.email" required>
+                  <input type="password" class="form-control" placeholder="Password" ng-model="login.password">
+                </form>
+                <p>Don't have an account? <a ui-sref="signup" data-dismiss="modal" class="text-center signup">Sign Up Here</a></p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary"><a href="/auth/facebook"><i class="fa fa-facebook"></i></a></button>
+                <button class="btn btn-success"><a href="/auth/twitter"><i class="fa fa-twitter"></i></a></button>
+                <button class="btn btn-warning"><a href="/auth/google"><i class="fa fa-google-plus"></i></a></button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="login()">Login</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Create Post Modal -->
+        <div class="modal fade" id="post" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Create New Post</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-group" ng-show="user">
+                  <input type="text" class="form-control" placeholder="Name" ng-model="skill.name" required>
+                  <select class="form-control" ng-model="skill.skillCategory" required>
+                    <option value="" disabled>Skill Category</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Cooking">Cooking</option>
+                    <option value="Music">Music</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Other">Other</option>                    
+                  </select>
+                  <input type="text" class="form-control col-md-6" placeholder="Skill" ng-model="skill.skillTitle" required>
+                  <textarea cols="30" rows="3" class="form-control" placeholder="Description of skill offered, your proficiency in the skill, and what you would like in return..." required ng-model="skill.description"></textarea>
+                </form>
+                <div ng-hide="user">
+                  <p>Please Login or <a ui-sref="signup" data-dismiss="modal" class="signup">Sign Up</a> to post.</p>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" ng-show="user" class="btn btn-primary" data-dismiss="modal" ng-click="postSkill()">Post</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ui-view -->
+      <div style="height: 50px;"></div>
+      <div ui-view></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascripts/script.js"></script>
+    </div>
+  </body>
+</html>

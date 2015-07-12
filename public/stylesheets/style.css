@@ -1,0 +1,24 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: white;
+}
+
+#logo{
+  color: #444444;
+  margin-left: 20px;
+  margin-top: -10px;
+  text-decoration: none;
+}
+#logo:hover{
+  text-decoration: none;
+}
+#nav-links{
+  margin-right: 20px;
+}
+.signup{
+  color: #00B7FF;
+}
