@@ -34,7 +34,7 @@
                   <input type="text" class="form-control" placeholder="Email" ng-model="login.email" required>
                   <input type="password" class="form-control" placeholder="Password" ng-model="login.password">
                 </form>
-                <p>Don't have an account? <a ui-sref="signup" data-dismiss="modal" class="text-center">Sign Up Here</a></p>
+                <p>Don't have an account? <a ui-sref="signup" data-dismiss="modal" class="text-center signup">Sign Up Here</a></p>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-primary"><a href="/auth/facebook"><i class="fa fa-facebook"></i></a></button>
@@ -68,7 +68,7 @@
                   <textarea cols="30" rows="3" class="form-control" placeholder="Description of skill offered, your proficiency in the skill, and what you would like in return..." required ng-model="skill.description"></textarea>
                 </form>
                 <div ng-hide="user">
-                  <p>Please Login or <a ui-sref="signup" data-dismiss="modal">Sign Up</a> to post.</p>
+                  <p>Please Login or <a ui-sref="signup" data-dismiss="modal" class="signup">Sign Up</a> to post.</p>
                 </div>
               </div>
               <div class="modal-footer">
@@ -79,7 +79,10 @@
         </div>
       </div>
       <!-- ui-view -->
-      <div style="height: 50px;"></div>
+      <div style="height: 100px;"></div>
+      <ul>
+        <li style="color: black;"><a href="/auth/google"><i class="fa fa-google-plus"></i>This is a string</a></li>
+      </ul>
       <div ui-view></div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
