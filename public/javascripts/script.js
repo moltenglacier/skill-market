@@ -39,17 +39,37 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     }
   }
 })
-.factory("UserService", function($http) {
-  return {
-    getProfile: function(profile_id) {
-      return $http.get('/api/users/' + profile_id);
-    },
-    postProfile: function(profile) {
-      return $http.post('/api/users/', profile);
-    }
+.factory('UserService', function($rootScope, $http, BASE_URL) {
+  var User = {};
+  User.isLoggedIn = false;
+  User.getUser = function(username) {
+    return $http.get("/users/" + username);
+  };
+  User.setCurrentUser = function() {
+    User.isLoggedIn = true;
+    $rootScope.currentUser = true;
   }
+  User.logoutCurrentUser = function() {
+    User.isLoggedIn = false;
+    $rootScope.currentUser = false;
+    $rootScope.currentUserData = {};
+  }
+  User.getAllUsers = function() {
+    return $http.get('/users');
+  };
+  return User;
 })
-.controller("NavCtrl", function($scope, $state, SkillService) {
+.controller("NavCtrl", function($scope, $state, $rootScope, SkillService, UserService) {
+  $rootScope.user = UserService.isLoggedIn;
+  UserService.getAllUsers()
+  .success(function(data) {
+    console.log(data);
+    $rootScope.user = true;
+    $scope.userData = data;
+  })
+  .catch(function(error) {
+    console.log(error)
+  })
   $scope.postSkill = function() {
     SkillService.postSkill($scope.skill)
     .success(function(data) {
@@ -59,17 +79,12 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       console.error(error);
     })
   }
-  // $scope.login = function() {
-  //   console.log('login');
-  //   $scope.login = {};
-  // }
+  $scope.logout = function() {
+    console.log('logout');
+    UserService.logoutCurrentUser()
+  }
 })
-.controller("SignupCtrl", function($scope) {
-  // $scope.signup = function() {
-  //   console.log('signup');
-  //   $scope.signup = {};
-  // }
-})
+.controller("SignupCtrl", function($scope) {})
 .controller("MarketCtrl", function($scope, SkillService) {
   SkillService.getAllSkills()
   .success(function(data) {

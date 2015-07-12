@@ -5,6 +5,7 @@ body {
 
 a {
   color: white;
+  cursor: pointer;
 }
 
 #logo{
@@ -21,4 +22,8 @@ a {
 }
 .signup{
   color: #00B7FF;
+}
+form{
+  padding-left: 20px;
+  padding-right: 20px;
 }

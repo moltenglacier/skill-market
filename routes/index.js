@@ -6,22 +6,13 @@ var router = express.Router();
 var User = mongoose.model("User", {
   id: { type: String, required: true },
   displayName: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, index: { unique: true, dropDups: true } },
   skills: [{ type: String }]
 });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.user);
-  // User.find({ email: req.user.emails[0].value }).exec(function(err, user) {
-  //   if (err) {
-  //     console.log(err);
-  //     res.status(400).json({ error: "Could not read user data" });
-  //   }
-  //   if (!user) {
-  //     res.status(404);
-  //   }
-  // });
   if (req.user){
     var entry = new User({
       id: req.user.id,
@@ -37,6 +28,17 @@ router.get('/', function(req, res, next) {
     });
   }
   res.render('index', { thisUserData: req.user });
+});
+
+router.get('/users', function(req, res) {
+  console.log(req.user);
+  User.find({}).exec(function(err, users) {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ error: "Could not retrieve users" });
+    }
+    res.json(users);
+  })
 });
 
 module.exports = router;
