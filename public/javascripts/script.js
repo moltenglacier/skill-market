@@ -73,8 +73,8 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 })
 .factory('TransactionService', function($http, BASE_URL) {
   return {
-    postTransaction: function() {
-      return $http.post('/api/transactions', skill);
+    postTransaction: function(transaction) {
+      return $http.post('/api/transactions', transaction);
     },
     getAllTransactions: function() {
       return $http.get('/api/transactions');
@@ -118,7 +118,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     console.error(error);
   })
 })
-.controller("SkillCtrl", function($scope, $rootScope, $state, SkillService) {
+.controller("SkillCtrl", function($scope, $rootScope, $state, SkillService, TransactionService) {
   var skill_id = $state.params.id;
   SkillService.getOneSkill(skill_id)
   .success(function(data) {
@@ -139,9 +139,23 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     var skillToTrade = $scope.skills.filter(function(skill) {
       return (skill.skillTitle === $scope.selectedSkill) && (skill.name === $rootScope.currentUserData.displayName);
     })
-    console.log(skillToTrade[0]);
-    console.log($scope.skill);
-
+    // console.log(skillToTrade[0]);
+    // console.log($scope.skill);
+    var transaction = {
+      userOne: skillToTrade[0].name,
+      userTwo: $scope.skill.name,
+      skillOne: skillToTrade[0].skillTitle,
+      skillTwo: $scope.skill.skillTitle,
+      status: 0,
+    }
+    TransactionService.postTransaction(transaction)
+    .success(function(data) {
+      console.log(data);
+      console.log("Transaction submitted!");
+    })
+    .catch(function(error) {
+      console.error(error);
+    })
   }
 })
 .controller("ProfileCtrl", function($scope, $state, UserService, SkillService) {
@@ -164,7 +178,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     console.error(error);
   })
 })
-.controller("ProfilepageCtrl", function($scope, $rootScope, $state, UserService, SkillService) {
+.controller("ProfilepageCtrl", function($scope, $rootScope, $state, UserService, SkillService, TransactionService) {
   UserService.getUser($rootScope.currentUserData.displayName)
   .success(function(data) {
     console.log(data);
@@ -177,6 +191,14 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   SkillService.getAllSkills()
   .success(function(data) {
     $scope.skills = data;
+  })
+  .catch(function(error) {
+    console.error(error);
+  })
+  TransactionService.getAllTransactions()
+  .success(function(data) {
+    console.log(data);
+    $scope.transactions = data;
   })
   .catch(function(error) {
     console.error(error);
