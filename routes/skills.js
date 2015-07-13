@@ -87,7 +87,7 @@ router.delete(skillsUrl + "/:id", function(req, res) {
       console.log(err);
       res.status(400).json({ error: "Could not read skill data" });
     }
-    if (!service) {
+    if (!skill) {
       res.status(404);
     }
     res.json({message: 'Skill deleted'});

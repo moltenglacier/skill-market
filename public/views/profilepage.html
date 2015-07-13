@@ -25,4 +25,37 @@
       </table>
     </div>
   </div>
+  <div style="height: 40px;"></div>
+  <div class="row">
+    <div class="card-row col-md-10 col-md-offset-1">
+      <h4>{{currentUserData.displayName}}'s Posts</h4>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-hide="index === editIndex" ng-repeat="(index, post) in skills | filter:{ name: currentUserData.displayName }">
+            <td>{{post.skillTitle}}</td>
+            <td>{{post.skillCategory}}</td>
+            <td>{{post.description}}</td>
+            <td><button class="btn btn-success" ng-click="editPost(index)">Edit</button></td>
+            <td><button class="btn btn-warning" ng-click="deletePost(index)">Delete</button></td>
+          </tr>
+          <tr ng-show="index === editIndex" ng-repeat="(index, post) in skills | filter:{ name: currentUserData.displayName }">
+            <td><input type="text" class="form-control" value="{{post.skillTitle}}"></td>
+            <td><input type="text" class="form-control" value="{{post.skillCategory}}"></td>
+            <td><input type="text" class="form-control" value="{{post.description}}"></td>
+            <td><button class="btn btn-success" ng-click="submitPost(index)">Submit</button></td>
+            <td><button class="btn btn-warning" ng-click="deletePost(index)">Delete</button></td>
+          </tr>          
+        </tbody>    
+      </table>
+    </div>
+  </div>
 </div>

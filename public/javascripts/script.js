@@ -41,6 +41,9 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     },
     postSkill: function(skill) {
       return $http.post('/api/skills', skill);
+    },
+    deleteSkill: function(skill_id) {
+      return $http.delete('/api/skills/' + skill_id)
     }
   }
 })
@@ -49,10 +52,6 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   User.getUser = function(username) {
     return $http.get("/users/" + username);
   };
-  // User.setCurrentUser = function() {
-  //   $rootScope.currentUserData.loggedIn = true;
-  //   $rootScope.currentUser = true;
-  // }
   User.logoutCurrentUser = function() {
     $rootScope.currentUserData = {};
     $rootScope.currentUserData.loggedIn = false;
@@ -63,9 +62,9 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   User.getCurrentUser = function() {
     return $http.get('/currentuser');
   };
-  User.postUserSkill = function(username, skill) {
-    return $http.post('/users/' + username + '/skills', skill);
-  };
+  // User.postUserSkill = function(username, skill) {
+  //   return $http.post('/users/' + username + '/skills', skill);
+  // };
   return User;
 })
 .controller("NavCtrl", function($scope, $state, $rootScope, SkillService, UserService) {
@@ -87,14 +86,14 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     .catch(function(error) {
       console.error(error);
     })
-    UserService.postUserSkill($rootScope.currentUserData.displayName, $scope.skill)
-    .success(function(data) {
-      console.log(data);
-      data.skills.push($scope.skill);
-    })
-    .catch(function(error) {
-      console.error(error);
-    })
+    // UserService.postUserSkill($rootScope.currentUserData.displayName, $scope.skill)
+    // .success(function(data) {
+    //   console.log(data);
+    //   data.skills.push($scope.skill);
+    // })
+    // .catch(function(error) {
+    //   console.error(error);
+    // })
   }
   $scope.logout = function() {
     console.log('logout');
@@ -123,7 +122,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     console.error(error);
   })
 })
-.controller("ProfileCtrl", function($scope, $state, UserService) {
+.controller("ProfileCtrl", function($scope, $state, UserService, SkillService) {
   var username = $state.params.id;
   UserService.getUser(username)
   .success(function(data) {
@@ -135,35 +134,15 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     alert("This user does not exist!");
     $state.go("market");
   })
-
-  // var profile_id;
-  // $scope.user = {
-  //   name: 'Stanley',
-  //   email: 'stanleyliu@berkeley.edu',
-  //   transactions: [
-  //     { 
-  //       person: 'Ryano',
-  //       swapGive: 'Karate',
-  //       swapTake: 'Regex',
-  //       time: new Date
-  //     },
-  //     { 
-  //       person: 'Sean',
-  //       swapGive: 'Mandarin Chinese',
-  //       swapTake: 'Arabic',
-  //       time: new Date
-  //     },
-  //     {
-  //       person: 'Trey',
-  //       swapGive: 'Mechanical Engineering',
-  //       swapTake: 'Nuclear Engineering',
-  //       time: new Date
-  //     }
-  //   ]
-  // }
-
+  SkillService.getAllSkills()
+  .success(function(data) {
+    $scope.skills = data;
+  })
+  .catch(function(error) {
+    console.error(error);
+  })
 })
-.controller("ProfilepageCtrl", function($scope, $rootScope, $state, UserService) {
+.controller("ProfilepageCtrl", function($scope, $rootScope, $state, UserService, SkillService) {
   UserService.getUser($rootScope.currentUserData.displayName)
   .success(function(data) {
     console.log(data);
@@ -173,6 +152,28 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     alert("You are not logged in!");
     $state.go("market");
   })
+  SkillService.getAllSkills()
+  .success(function(data) {
+    $scope.skills = data;
+  })
+  .catch(function(error) {
+    console.error(error);
+  })
+  $scope.deletePost = function(index) {
+    SkillService.deleteSkill($scope.skills[index]._id)
+    .success(function(data) {
+      console.log("Successfully deleted skill!");
+    })
+    .catch(function(error) {
+      console.error("Did not delete skill!");
+    })
+  }
+  $scope.editPost = function(index) {
+    $scope.editIndex = index;
+  }
+  $scope.submitPost = function(index) {
+    console.log('submit');
+  }
 })
 
 
