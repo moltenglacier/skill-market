@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 
-// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/transactions');
+mongoose.createConnection(process.env.MONGOLAB_URI || 'mongodb://localhost/transactions');
 
 var Transaction = mongoose.model("Transaction", {
   userOne: { type: String, required: true },
@@ -15,16 +15,8 @@ var Transaction = mongoose.model("Transaction", {
 
 var transactionUrl = '/transactions';
 
-Transaction.on('index', function(err) {
-  if (err) {
-    console.error(err);
-  }
-});
-
 router.post(transactionUrl, function(req, res, next) {
   var newTransaction = new Transaction(req.body);
-  console.log(newTransaction);
-
   newTransaction.save(function(err, savedTransaction) {
     console.log('transaction running');
     if (err) {
