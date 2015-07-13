@@ -1,7 +1,18 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #F0F0F0; 
 }
+.card{
+  margin-bottom: 10px;
+  margin-top: 10px;
+  z-index: 1;
+}
+/*.background-image {
+  background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url("http://pre01.deviantart.net/dfda/th/pre/i/2010/335/b/b/the_trading_of_goods_by_vendelrus-d33zdll.jpg") no-repeat;
+  background-size: cover;
+}*/
+
 a {
   color: white;
   cursor: pointer;
