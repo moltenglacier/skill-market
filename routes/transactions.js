@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/skills');
+// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/transactions');
 
 var Transaction = mongoose.model("Transaction", {
   userOne: { type: String, required: true },
@@ -23,7 +23,10 @@ Transaction.on('index', function(err) {
 
 router.post(transactionUrl, function(req, res, next) {
   var newTransaction = new Transaction(req.body);
+  console.log(newTransaction);
+
   newTransaction.save(function(err, savedTransaction) {
+    console.log('transaction running');
     if (err) {
       console.log(err);
       res.status(400).json({ error: "Validation Failed" });
@@ -31,7 +34,7 @@ router.post(transactionUrl, function(req, res, next) {
     console.log("savedTransaction:", savedTransaction);
     res.json(savedTransaction);
   });
-})
+});
 
 router.get(transactionUrl, function(req, res, next) {
   Transaction.find({}).exec(function(err, transactions) {
