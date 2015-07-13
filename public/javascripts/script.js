@@ -175,10 +175,10 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $scope.editIndex = index;
   }
   $scope.submitPost = function(index) {
-    // console.log($scope.update.skillTitle);
+    // console.log($scope.update.skillTitle.$modelValue);
     console.log($scope.update);
-    // console.log($scope.update.description);
-    console.log($scope.skills[index]);
+    // console.log($scope.update.description.$modelValue);
+
     // $scope.skills[index].skillTitle = $scope.update.skillTitle;
     // $scope.skills[index].skillCategory = $scope.update.skillCategory;
     // $scope.skills[index].description = $scope.update.description;
@@ -191,6 +191,10 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     //   console.log(error);
     // })
     $scope.editIndex = false;
+    console.log($scope.skills[index]);
+    console.log($scope.skills[index].skillTitle);
+    console.log($scope.skills[index].skillCategory);
+    console.log($scope.skills[index].description);
   }
 })
 
