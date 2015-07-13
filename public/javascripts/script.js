@@ -28,11 +28,6 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: "/views/profile.html",
       controller: "ProfileCtrl"      
     })
-    .state('transaction', {
-      url: "/transaction",
-      templateUrl: "/views/transaction.html",
-      controller: "TransactionCtrl"
-    })
 })
 .constant("BASE_URL", "http:localhost:3000")
 .factory("SkillService", function($http) {
@@ -78,6 +73,9 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     },
     getAllTransactions: function() {
       return $http.get('/api/transactions');
+    },
+    updateTransaction: function(transaction_id, updatedTransaction) {
+      return $http.patch('/api/transactions/' + transaction_id, updatedTransaction)
     }
   }
 })
@@ -156,6 +154,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     .catch(function(error) {
       console.error(error);
     })
+    $state.go("market");
   }
 })
 .controller("ProfileCtrl", function($scope, $state, UserService, SkillService) {
@@ -215,28 +214,54 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $scope.editPost = function(index) {
     $scope.editIndex = index;
   }
-  $scope.submitPost = function(index) {
-    // console.log($scope.update);
-    // $scope.skills[index].skillTitle = $scope.update.skillTitle;
-    // $scope.skills[index].skillCategory = $scope.update.skillCategory;
-    // $scope.skills[index].description = $scope.update.description;
-    // SkillService.editSkill($scope.skills[index]._id, $scope.skills[index])
+  $scope.acceptTransaction = function() {
+    // var transaction_id;
+    // var updateTransaction;
+
+    // TransactionService.updateTransaction(transaction_id, updatedTransaction)
     // .success(function(data) {
-    //   console.log("Successfully updated skill!");
     //   console.log(data);
     // })
     // .catch(function(error) {
-    //   console.log(error);
+    //   console.error(error);
     // })
-    $scope.editIndex = false;
-    console.log($scope.skills[index]);
-    console.log($scope.skills[index].skillTitle);
-    console.log($scope.skills[index].skillCategory);
-    console.log($scope.skills[index].description);
+  }
+  $scope.deleteTransaction = function() {
+
   }
 })
-.controller("TransactionCtrl", function($scope) {
 
-})
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // $scope.submitPost = function(index) {
+  //   // console.log($scope.update);
+  //   // $scope.skills[index].skillTitle = $scope.update.skillTitle;
+  //   // $scope.skills[index].skillCategory = $scope.update.skillCategory;
+  //   // $scope.skills[index].description = $scope.update.description;
+  //   // SkillService.editSkill($scope.skills[index]._id, $scope.skills[index])
+  //   // .success(function(data) {
+  //   //   console.log("Successfully updated skill!");
+  //   //   console.log(data);
+  //   // })
+  //   // .catch(function(error) {
+  //   //   console.log(error);
+  //   // })
+  //   $scope.editIndex = false;
+  //   console.log($scope.skills[index]);
+  //   console.log($scope.skills[index].skillTitle);
+  //   console.log($scope.skills[index].skillCategory);
+  //   console.log($scope.skills[index].description);
+  // }
 
