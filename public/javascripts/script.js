@@ -29,6 +29,11 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: "/views/profile.html",
       controller: "ProfileCtrl"      
     })
+    .state('transaction', {
+      url: "/transaction",
+      templateUrl: "/views/transaction.html",
+      controller: "TransactionCtrl"
+    })
 })
 .constant("BASE_URL", "http:localhost:3000")
 .factory("SkillService", function($http) {
@@ -175,10 +180,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $scope.editIndex = index;
   }
   $scope.submitPost = function(index) {
-    // console.log($scope.update.skillTitle.$modelValue);
-    console.log($scope.update);
-    // console.log($scope.update.description.$modelValue);
-
+    // console.log($scope.update);
     // $scope.skills[index].skillTitle = $scope.update.skillTitle;
     // $scope.skills[index].skillCategory = $scope.update.skillCategory;
     // $scope.skills[index].description = $scope.update.description;
