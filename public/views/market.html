@@ -2,7 +2,7 @@
   <h2>Welcome {{currentUserData.displayName || "Guest"}}</h2>
   <br>
   <div class="row">
-    <div class="card col-md-4" ng-repeat="(index, post) in posts">
+    <div class="card col-md-4" ng-repeat="(index, post) in posts | filter: { name: '!' + (currentUserData.displayName || 0) }">
       <a ui-sref="skill({ id: post._id })"><img src="http://placehold.it/300x300"></a>
       <a ui-sref="otherProfile({ id: post.name })"><h4>{{post.name}}</h4></a>
       <p>Category: {{post.skillCategory}}</p>

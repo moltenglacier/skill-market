@@ -8,7 +8,12 @@
       <h3>{{skill.skillCategory}}</h3>
       <h3>{{skill.name}}</h3>
       <p>{{skill.description}}</p>
-      <button class="btn btn-success">Trade with {{}}</button>
+      <button class="btn btn-success btn-lg" ng-click="offerTrade()">Trade with
+        <select class="btn-select form-control">
+          <option class="btn-option" style="min-width: 100px;" ng-repeat="post in skills | filter:{ name: currentUserData.displayName }" value="{{post.skillTitle}}" ng-model="selectedSkill">{{post.skillTitle}}<i class="fa fa-arrow-down"></i></option>
+        </select>
+      </button>
+
     </div>
   </div>
 </div>

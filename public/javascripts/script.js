@@ -44,6 +44,9 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     },
     deleteSkill: function(skill_id) {
       return $http.delete('/api/skills/' + skill_id)
+    },
+    editSkill: function(skill_id, updatedSkill) {
+      return $http.patch('/api/skills/' + skill_id, updatedSkill)
     }
   }
 })
@@ -62,9 +65,6 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   User.getCurrentUser = function() {
     return $http.get('/currentuser');
   };
-  // User.postUserSkill = function(username, skill) {
-  //   return $http.post('/users/' + username + '/skills', skill);
-  // };
   return User;
 })
 .controller("NavCtrl", function($scope, $state, $rootScope, SkillService, UserService) {
@@ -86,18 +86,11 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     .catch(function(error) {
       console.error(error);
     })
-    // UserService.postUserSkill($rootScope.currentUserData.displayName, $scope.skill)
-    // .success(function(data) {
-    //   console.log(data);
-    //   data.skills.push($scope.skill);
-    // })
-    // .catch(function(error) {
-    //   console.error(error);
-    // })
   }
   $scope.logout = function() {
     console.log('logout');
     UserService.logoutCurrentUser();
+    $state.go("market");
   }
 })
 .controller("SignupCtrl", function($scope) {})
@@ -121,6 +114,16 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   .catch(function(error) {
     console.error(error);
   })
+  SkillService.getAllSkills()
+  .success(function(data) {
+    $scope.skills = data;
+  })
+  .catch(function(error) {
+    console.error(error);
+  })
+  $scope.offerTrade = function() {
+    console.log($scope.selectedSkill);
+  }
 })
 .controller("ProfileCtrl", function($scope, $state, UserService, SkillService) {
   var username = $state.params.id;
@@ -172,7 +175,22 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $scope.editIndex = index;
   }
   $scope.submitPost = function(index) {
-    console.log('submit');
+    // console.log($scope.update.skillTitle);
+    console.log($scope.update);
+    // console.log($scope.update.description);
+    console.log($scope.skills[index]);
+    // $scope.skills[index].skillTitle = $scope.update.skillTitle;
+    // $scope.skills[index].skillCategory = $scope.update.skillCategory;
+    // $scope.skills[index].description = $scope.update.description;
+    // SkillService.editSkill($scope.skills[index]._id, $scope.skills[index])
+    // .success(function(data) {
+    //   console.log("Successfully updated skill!");
+    //   console.log(data);
+    // })
+    // .catch(function(error) {
+    //   console.log(error);
+    // })
+    $scope.editIndex = false;
   }
 })
 

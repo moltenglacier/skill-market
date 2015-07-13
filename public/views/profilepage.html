@@ -48,9 +48,9 @@
             <td><button class="btn btn-warning" ng-click="deletePost(index)">Delete</button></td>
           </tr>
           <tr ng-show="index === editIndex" ng-repeat="(index, post) in skills | filter:{ name: currentUserData.displayName }">
-            <td><input type="text" class="form-control" value="{{post.skillTitle}}"></td>
-            <td><input type="text" class="form-control" value="{{post.skillCategory}}"></td>
-            <td><input type="text" class="form-control" value="{{post.description}}"></td>
+            <td><input type="text" class="form-control" ng-model="update.skillTitle"></td>
+            <td><input type="text" class="form-control" ng-model="update.skillCategory"></td>
+            <td><input type="text" class="form-control" ng-model="update.description"></td>
             <td><button class="btn btn-success" ng-click="submitPost(index)">Submit</button></td>
             <td><button class="btn btn-warning" ng-click="deletePost(index)">Delete</button></td>
           </tr>          

@@ -28,6 +28,15 @@ a:active{
 .signup{
   color: #00B7FF;
 }
+.btn-select{
+  display: inline;
+  text-transform: uppercase;
+  color: white;
+  border: none;
+}
+.btn-option{
+  text-align: center;
+}
 /*form{
   margin-left: 40px;
   margin-right: 40px;
