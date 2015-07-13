@@ -88,14 +88,14 @@
             <td>{{post.skillCategory}}</td>
             <td>{{post.description}}</td>
             <td><button class="btn btn-success" ng-click="editPost(index)">Edit</button></td>
-            <td><button class="btn btn-warning" ng-click="deletePost(index)">Delete</button></td>
+            <td><button class="btn btn-warning" ng-click="deletePost(post._id)">Delete</button></td>
           </tr>
           <tr ng-show="index === editIndex" ng-repeat="(index, post) in skills | filter:{ name: currentUserData.displayName }">
-            <td><input type="text" class="form-control" ng-model="update.skillTitle"></td>
-            <td><input type="text" class="form-control" ng-model="update.skillCategory"></td>
-            <td><input type="text" class="form-control" ng-model="update.description"></td>
-            <td><button class="btn btn-success" ng-click="submitPost(index)">Submit</button></td>
-            <td><button class="btn btn-warning" ng-click="deletePost(index)">Delete</button></td>
+            <td><input type="text" class="form-control" placeholder="{{post.skillTitle}}" ng-model="update.skillTitle"></td>
+            <td><input type="text" class="form-control" placeholder="{{post.skillCategory}}" ng-model="update.skillCategory"></td>
+            <td><input type="text" class="form-control" placeholder="{{post.description}}" ng-model="update.description"></td>
+            <td><button class="btn btn-success" ng-click="submitPost(post._id, update)">Submit</button></td>
+            <td><button class="btn btn-warning" ng-click="deletePost(post._id)">Delete</button></td>
           </tr>          
         </tbody>    
       </table>
