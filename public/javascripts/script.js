@@ -79,6 +79,26 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     }
   }
 })
+.filter('transactionHistory', function() {
+  return function(input, user) {
+    var filtered = [];
+    // for (var i = 0; i < input.length)
+    input.forEach(function(trade) {
+      if (trade.userOne === user) {
+        filtered.push(trade);
+      }
+      if (trade.userTwo === user) {
+        var temp = Object.create(trade);
+        trade.userOne = temp.userTwo;
+        trade.userTwo = temp.userOne;
+        trade.skillOne = temp.skillTwo;
+        trade.skillTwo = temp.skillOne;
+        filtered.push(trade);
+      }
+    })
+    return filtered;
+  }
+})
 .controller("NavCtrl", function($scope, $state, $rootScope, SkillService, UserService) {
   UserService.getCurrentUser()
   .success(function(data) {
@@ -196,7 +216,6 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   })
   TransactionService.getAllTransactions()
   .success(function(data) {
-    console.log(data);
     $scope.transactions = data;
   })
   .catch(function(error) {
