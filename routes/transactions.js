@@ -39,4 +39,18 @@ router.get(transactionUrl, function(req, res, next) {
   });
 });
 
+router.patch(transactionUrl + "/:id", function(req, res) {
+  Transaction.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true } )
+  .exec(function(err, updatedTransaction) {
+    if (err) {
+      console.log(err);
+      res.status(400).json({ error: "Could not read skill data" });
+    }
+    if (!updatedTransaction) {
+      res.status(404);
+    }
+    res.json(updatedTransaction);
+  });
+});
+
 module.exports = router;

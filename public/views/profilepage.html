@@ -1,25 +1,57 @@
 <div class="container-fluid">
   <div class="row">
-    <div class='col-md-4 col-md-offset-1'>
+    <div class='col-md-4'>
       <img class="th" src="http://placehold.it/300x300">
       <h2>{{currentUserData.displayName}}</h1>
       <h4>{{currentUserData.emails[0].value}}</h3>
     </div>
-    <div class='col-md-6'>
+    <div class='col-md-8'>
       <h3>Transactions</h3>
+      <h4>Sent Request</h4>
       <table class="table table-hover">
         <thead>
           <th>Person</th>
           <th>Give</th>
           <th>Take</th>
           <th>Time</th>
+          <th>Status</th>
         </thead>
         <tbody>
-          <tr ng-repeat="deal in transactions">
-            <th>{{deal.person}}</th>
-            <th>{{deal.swapGive}}</th>
-            <th>{{deal.swapTake}}</th>
-            <th>{{deal.time}}</th>
+          <tr ng-repeat="deal in transactions | filter: { userOne: currentUserData.displayName }">
+            <td>{{deal.userTwo}}</td>
+            <td>{{deal.skillOne}}</td>
+            <td>{{deal.skillTwo}}</td>
+            <td>{{deal.createdAt | date: long}}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" ng-show="deal.status === -1">Rejected</button>
+              <button class="btn btn-sm btn-primary" ng-show="deal.status === 0">Pending</button>
+              <button class="btn btn-sm btn-success" ng-show="deal.status === 1" disabled>Accepted</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Pending Requests</h4>
+      <table class="table table-hover">
+        <thead>
+          <th>Person</th>
+          <th>Give</th>
+          <th>Take</th>
+          <th>Time</th>
+          <th>Accept</th>
+          <th>Reject</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="deal in transactions | filter: { userTwo: currentUserData.displayName }">
+            <td>{{deal.userTwo}}</td>
+            <td>{{deal.skillOne}}</td>
+            <td>{{deal.skillTwo}}</td>
+            <td>{{deal.createdAt | date: long}}</td>
+            <td>
+              <button class="btn btn-sm btn-success" ng-click="acceptTransaction()">Accept</button>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-warning" ng-click="rejectTransaction()">Reject</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -27,7 +59,7 @@
   </div>
   <div style="height: 40px;"></div>
   <div class="row">
-    <div class="card-row col-md-10 col-md-offset-1">
+    <div class="card-row col-md-12">
       <h4>{{currentUserData.displayName}}'s Posts</h4>
       <table class="table table-hover">
         <thead>
