@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var fs = require('fs');
+// var fs = require('fs');
 var router = express.Router();
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/skills');
@@ -22,15 +22,15 @@ Skill.on('index', function(err) {
   }
 });
 
-router.get('/', function(req, res, next) {
-  fs.readFile('./routes/request.html', 'utf8', function(err, data){
-    if(err){
-      console.log(err);
-      res.status(500).json({ error: 'Something went wrong! Fix it idiot!' });
-    }
-    res.send(data);
-  });
-});
+// router.get('/', function(req, res, next) {
+//   fs.readFile('./routes/request.html', 'utf8', function(err, data){
+//     if(err){
+//       console.log(err);
+//       res.status(500).json({ error: 'Something went wrong! Fix it idiot!' });
+//     }
+//     res.send(data);
+//   });
+// });
 
 router.post(skillsUrl, function(req, res, next){
   var newSkill = new Skill(req.body);
