@@ -17,10 +17,21 @@
           <th>Status</th>
         </thead>
         <tbody>
-          <tr ng-repeat="trade in transactions | transactionHistory: currentUserData.displayName">
+          <tr ng-repeat="trade in transactions | filter: { userOne: currentUserData.displayName }">
             <td>{{trade.userTwo}}</td>
             <td>{{trade.skillOne}}</td>
             <td>{{trade.skillTwo}}</td>
+            <td>{{trade.createdAt | date: long}}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" ng-show="trade.status === -1" disabled>Rejected</button>
+              <button class="btn btn-sm btn-primary" ng-show="trade.status === 0" disabled>Pending</button>
+              <button class="btn btn-sm btn-success" ng-show="trade.status === 1" disabled>Accepted</button>
+            </td>
+          </tr>
+          <tr ng-repeat="trade in transactions | filter: { userTwo: currentUserData.displayName }" >
+            <td>{{trade.userOne}}</td>
+            <td>{{trade.skillTwo}}</td>
+            <td>{{trade.skillOne}}</td>
             <td>{{trade.createdAt | date: long}}</td>
             <td>
               <button class="btn btn-sm btn-warning" ng-show="trade.status === -1" disabled>Rejected</button>
