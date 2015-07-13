@@ -15,10 +15,10 @@
             <h3><a ui-sref="market" class="logo">Skill Swap</a></h3>
           </div>
           <ul class="nav navbar-nav navbar-right" id="nav-links">
-            <li><a ui-sref="profile({ id: profile._id })" ng-show="currentUserData.loggedIn">Profile</a></li>
-            <li><a data-toggle="modal" data-target="#post">Post</a></li>
-            <li><a data-toggle="modal" data-target="#login" ng-hide="currentUserData.loggedIn">Login</a></li>
-            <li><a ng-click="logout()" ng-show="currentUserData.loggedIn">Logout</a></li>
+            <li><a ui-sref="profile({ id: profile._id })" ng-show="currentUserData.loggedIn"><i class="fa fa-user"></i> Profile</a></li>
+            <li><a data-toggle="modal" data-target="#post"><i class="fa fa-plus"></i> Post</a></li>
+            <li><a data-toggle="modal" data-target="#login" ng-hide="currentUserData.loggedIn"><i class="fa fa-sign-in"></i> Login</a></li>
+            <li><a ng-click="logout()" ng-show="currentUserData.loggedIn"><i class="fa fa-sign-out"></i> Logout</a></li>
           </ul>
         </nav>
         <!-- Login Modal -->
@@ -37,9 +37,9 @@
                 <p>Don't have an account? <a ui-sref="signup" data-dismiss="modal" class="text-center signup">Sign Up Here</a></p>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-primary"><a href="/auth/facebook"><i class="fa fa-facebook"></i></a></button>
-                <button class="btn btn-success"><a href="/auth/twitter"><i class="fa fa-twitter"></i></a></button>
-                <button class="btn btn-warning"><a href="/auth/google"><i class="fa fa-google-plus"></i></a></button>
+                <a href="/auth/facebook"><button class="btn btn-primary"><i class="fa fa-facebook"></i></button></a>
+                <a href="/auth/twitter"><button class="btn btn-success"><i class="fa fa-twitter"></i></button></a>
+                <a href="/auth/google"><button class="btn btn-warning"><i class="fa fa-google-plus"></i></button></a>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="login()">Login</button>
               </div>
             </div>
@@ -55,7 +55,6 @@
               </div>
               <div class="modal-body">
                 <form class="form-group" ng-show="currentUserData.loggedIn">
-                  <input type="text" class="form-control" placeholder="Name" ng-model="skill.name" required>
                   <select class="form-control" ng-model="skill.skillCategory" required>
                     <option value="" disabled>Skill Category</option>
                     <option value="Programming">Programming</option>
@@ -80,9 +79,6 @@
       </div>
       <!-- ui-view -->
       <div style="height: 50px;"></div>
-      <ul>
-        <li style="color: black;"><a href="/auth/google"><i class="fa fa-google-plus"></i>This is a string</a></li>
-      </ul>
       <div ui-view></div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

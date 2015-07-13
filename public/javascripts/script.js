@@ -1,4 +1,3 @@
-console.log('this is script');
 var skill = angular.module("skill", ["ui.router"]);
 skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   // $locationProvider.html5Mode({ enabled: true, requireBase: false });
@@ -109,7 +108,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     console.error(error);
   })
 })
-.controller("SkillCtrl", function($scope, $state, SkillService) {
+.controller("SkillCtrl", function($scope, $rootScope, $state, SkillService) {
   var skill_id = $state.params.id;
   SkillService.getOneSkill(skill_id)
   .success(function(data) {
@@ -127,7 +126,12 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     console.error(error);
   })
   $scope.offerTrade = function() {
-    console.log($scope.selectedSkill);
+    var skillToTrade = $scope.skills.filter(function(skill) {
+      return (skill.skillTitle === $scope.selectedSkill) && (skill.name === $rootScope.currentUserData.displayName);
+    })
+    console.log(skillToTrade[0]);
+    console.log($scope.skill);
+
   }
 })
 .controller("ProfileCtrl", function($scope, $state, UserService, SkillService) {
@@ -198,6 +202,9 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     console.log($scope.skills[index].skillCategory);
     console.log($scope.skills[index].description);
   }
+})
+.controller("TransactionCtrl", function($scope) {
+
 })
 
 
