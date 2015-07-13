@@ -8,11 +8,21 @@
       <h3>{{skill.skillCategory}}</h3>
       <h3>{{skill.name}}</h3>
       <p>{{skill.description}}</p>
-      <button class="btn btn-success btn-lg" ng-click="offerTrade()" ng-show="currentUserData.loggedIn">Trade with
-      </button>
-      <select class="btn-select form-control" ng-model="selectedSkill">
-        <option class="btn-option" style="min-width: 100px;" ng-repeat="post in skills | filter:{ name: currentUserData.displayName }" value="{{post.skillTitle}}">{{post.skillTitle}}</option>
-      </select>
+<!--       <span ng-show="currentUserData.loggedIn">
+        <button class="btn btn-success btn-lg" ng-click="offerTrade()" >Trade with</button>
+        <select class="btn-select form-control" ng-model="selectedSkill">
+          <option class="btn-option" ng-repeat="post in skills | filter:{ name: currentUserData.displayName }" value="{{post.skillTitle}}">{{post.skillTitle}}</option>
+        </select>
+      </span> -->
+      <div class="btn-group" role="group" ng-show="currentUserData.loggedIn">
+        <button type="button" ng-click="offerTrade()" class="btn btn-success btn-lg">Trade with</button>
+        <div class="btn-group" id="shit-input" role="group">
+          <select class="btn-select form-control dropdown-menu" ng-model="selectedSkill">
+            <option value=""> YOUR SKILL</option>
+            <option class="btn-option" ng-repeat="post in skills | filter:{ name: currentUserData.displayName }" value="{{post.skillTitle}}"> {{post.skillTitle}}</option>
+          </select>
+        </div>
+      </div>
     </div>
   </div>
 </div>
