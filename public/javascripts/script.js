@@ -55,21 +55,31 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   }
 })
 .factory('UserService', function($rootScope, $http, BASE_URL) {
-  var User = {};
-  User.getUser = function(username) {
-    return $http.get("/users/" + username);
-  };
-  User.logoutCurrentUser = function() {
-    $rootScope.currentUserData = {};
-    $rootScope.currentUserData.loggedIn = false;
+  return {
+    getUser: function(username) {
+      return $http.get("/users/" + username);
+    },
+    logoutCurrentUser: function() {
+      $rootScope.currentUserData = {};
+      $rootScope.currentUserData.loggedIn = false;
+    },
+    getAllUsers: function() {
+      return $http.get('/users');
+    },
+    getCurrentUser: function() {
+      return $http.get('/currentuser');
+    }
   }
-  User.getAllUsers = function() {
-    return $http.get('/users');
-  };
-  User.getCurrentUser = function() {
-    return $http.get('/currentuser');
-  };
-  return User;
+})
+.factory('TransactionService', function($http, BASE_URL) {
+  return {
+    postTransaction: function() {
+      return $http.post('/api/transactions', skill);
+    },
+    getAllTransactions: function() {
+      return $http.get('/api/transactions');
+    }
+  }
 })
 .controller("NavCtrl", function($scope, $state, $rootScope, SkillService, UserService) {
   UserService.getCurrentUser()
