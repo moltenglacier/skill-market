@@ -214,20 +214,31 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $scope.editPost = function(index) {
     $scope.editIndex = index;
   }
-  $scope.acceptTransaction = function() {
-    // var transaction_id;
-    // var updateTransaction;
-
-    // TransactionService.updateTransaction(transaction_id, updatedTransaction)
-    // .success(function(data) {
-    //   console.log(data);
-    // })
-    // .catch(function(error) {
-    //   console.error(error);
-    // })
+  $scope.acceptTransaction = function(deal) {
+    var transaction_id = deal._id;
+    deal.status = 1;
+    var updatedTransaction = deal;
+    console.log(updatedTransaction)
+    TransactionService.updateTransaction(transaction_id, updatedTransaction)
+    .success(function(data) {
+      console.log(data);
+    })
+    .catch(function(error) {
+      console.error(error);
+    })
   }
   $scope.deleteTransaction = function() {
-
+    var transaction_id = deal._id;
+    deal.status = -1;
+    var updatedTransaction = deal;
+    console.log(updatedTransaction)
+    TransactionService.updateTransaction(transaction_id, updatedTransaction)
+    .success(function(data) {
+      console.log(data);
+    })
+    .catch(function(error) {
+      console.error(error);
+    })
   }
 })
 
