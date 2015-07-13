@@ -41,4 +41,45 @@ router.get('/users', function(req, res) {
   })
 });
 
+router.get('/users/:id', function(req, res) {
+  User.findOne({ displayName: req.params.id }).exec(function(err, user) {
+    if (err) {
+      console.log(err);
+      res.status(400).json({ error: "Could not read user data" });
+    }
+    if (!user) {
+      res.status(404);
+    }
+    res.json(user);
+  });
+})
+
+router.get('/users/:id/skills', function(req, res) {
+  console.log(req.user);
+  User.findOne({ displayName: req.params.id }).exec(function(err, skills) {
+    if (err) {
+      console.log(err);
+      res.status(400).json({ error: "Could not find user's skills"});
+    }
+    res.json(skills);
+  })
+})
+
+router.post('/users/:id/skills', function(req, res) {
+  console.log(req.user);
+  var newSkill = new Skill(req.body);
+  User.findOne({ displayName: req.params.id }).save().exec(function(err, savedSkill) {
+    if (err) {
+      console.log(err);
+      res.status(400).json({ error: "Could not save user's skill"});
+    }
+    res.json(savedSkill);
+  })
+})
+
+router.get('/currentuser', function(req, res) {
+  console.log(req.user);
+  res.json(req.user);
+})
+
 module.exports = router;

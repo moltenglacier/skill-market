@@ -2,28 +2,33 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 a {
   color: white;
   cursor: pointer;
 }
-
-#logo{
+a:hover{
+  text-decoration: none;
+  color: black;
+}
+a:active{
+  color: black;
+  text-decoration: none;
+}
+.logo{
   color: #444444;
-  margin-left: 20px;
-  margin-top: -10px;
+  margin-left: 50px;
   text-decoration: none;
 }
 #logo:hover{
   text-decoration: none;
 }
 #nav-links{
-  margin-right: 20px;
+  margin-right: 50px;
 }
 .signup{
   color: #00B7FF;
 }
-form{
-  padding-left: 20px;
-  padding-right: 20px;
-}
+/*form{
+  margin-left: 40px;
+  margin-right: 40px;
+}*/
