@@ -167,7 +167,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     TransactionService.postTransaction(transaction)
     .success(function(data) {
       console.log("Transaction submitted!");
-      swal("Transaction submitted!", "success");
+      swal("Good job!", "Transaction submitted!", "success");
     })
     .catch(function(error) {
       console.error(error);
@@ -184,7 +184,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   })
   .catch(function(error) {
     console.error(error);
-    swal("This user does not exist!", "error");
+    swal("Warning!", "This user does not exist!", "error");
     $state.go("market");
   })
   SkillService.getAllSkills()
@@ -209,7 +209,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   })
   .catch(function(error) {
     console.error(error);
-    swal("You are not logged in!", "error");
+    swal("Warning", "You are not logged in!", "error");
     $state.go("market");
   })
   SkillService.getAllSkills()
@@ -230,7 +230,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     SkillService.deleteSkill(skillID)
     .success(function(data) {
       console.log("Successfully deleted skill!");
-      swal("Successfully deleted skill!", "success");
+      swal("Good job!", "Successfully deleted skill!", "success");
     })
     .catch(function(error) {
       console.error("Did not delete skill!");
@@ -242,7 +242,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $scope.submitPost = function(skillId, update) {
     SkillService.editSkill(skillId, update)
     .success(function(data) {
-      swal("Successfully updated skill!", "success");
+      swal("Good job!", "Successfully updated skill!", "success");
       console.log(data);
     })
     .catch(function(error) {
@@ -258,6 +258,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     TransactionService.updateTransaction(transaction_id, updatedTransaction)
     .success(function(data) {
       console.log(data);
+      swal("Good job!", "Successfully accepted transaction!", "success");
     })
     .catch(function(error) {
       console.error(error);
@@ -271,6 +272,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     TransactionService.updateTransaction(transaction_id, updatedTransaction)
     .success(function(data) {
       console.log(data);
+      swal("Good job!", "Successfully rejected transaction!", "error");
     })
     .catch(function(error) {
       console.error(error);
