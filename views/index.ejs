@@ -64,7 +64,8 @@
                     <option value="Sport">Sport</option>
                     <option value="Other">Other</option>                    
                   </select>
-                  <input type="text" class="form-control col-md-6" placeholder="Skill" ng-model="skill.skillTitle" required>
+                  <input type="text" class="form-control" placeholder="Skill" ng-model="skill.skillTitle" required>
+                  <input type="text" class="form-control" placeholder="Image URL" ng-model="skill.image">
                   <textarea cols="30" rows="3" class="form-control" placeholder="Description of skill offered, your proficiency in the skill, and what you would like in return..." required ng-model="skill.description"></textarea>
                 </form>
                 <div ng-hide="currentUserData.loggedIn">
