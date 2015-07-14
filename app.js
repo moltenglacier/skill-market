@@ -18,7 +18,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: '//knowledgetrader.herokuapp.com/auth/google/callback'},
+  callbackURL: 'https://knowledgetrader.herokuapp.com/auth/google/callback'},
   function(req, accessToken, refreshToken, profile, done){
     done(null, profile);
   }
