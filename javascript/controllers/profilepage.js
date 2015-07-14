@@ -1,6 +1,6 @@
 'use strict'
 
-skill..controller("ProfilepageCtrl", function($scope, $rootScope, $state, UserService, SkillService, TransactionService) {
+skill.controller("ProfilepageCtrl", function($scope, $rootScope, $state, UserService, SkillService, TransactionService) {
   UserService.getUser($rootScope.currentUserData.displayName)
   .success(function(data) {})
   .catch(function(error) {
