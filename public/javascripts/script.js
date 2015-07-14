@@ -113,7 +113,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $scope.skill.name = $rootScope.currentUserData.displayName;
     SkillService.postSkill($scope.skill)
     .success(function(data) {
-      sweetAlert("This post was successfully proccessed!");
+      swal("This post was successfully proccessed!", "success");
     })
     .catch(function(error) {
       console.error(error);
@@ -166,8 +166,8 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     }
     TransactionService.postTransaction(transaction)
     .success(function(data) {
-      console.log(data);
       console.log("Transaction submitted!");
+      swal("Transaction submitted!", "success");
     })
     .catch(function(error) {
       console.error(error);
@@ -184,7 +184,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   })
   .catch(function(error) {
     console.error(error);
-    sweetAlert("This user does not exist!");
+    swal("This user does not exist!", "error");
     $state.go("market");
   })
   SkillService.getAllSkills()
@@ -209,7 +209,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   })
   .catch(function(error) {
     console.error(error);
-    sweetAlert("You are not logged in!");
+    swal("You are not logged in!", "error");
     $state.go("market");
   })
   SkillService.getAllSkills()
@@ -227,11 +227,10 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     console.error(error);
   })
   $scope.deletePost = function(skillID) {
-    console.log(skillID);
     SkillService.deleteSkill(skillID)
     .success(function(data) {
       console.log("Successfully deleted skill!");
-      sweetAlert("Successfully deleted skill!");
+      swal("Successfully deleted skill!", "success");
     })
     .catch(function(error) {
       console.error("Did not delete skill!");
@@ -243,7 +242,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $scope.submitPost = function(skillId, update) {
     SkillService.editSkill(skillId, update)
     .success(function(data) {
-      sweetAlert("Successfully updated skill!");
+      swal("Successfully updated skill!", "success");
       console.log(data);
     })
     .catch(function(error) {
