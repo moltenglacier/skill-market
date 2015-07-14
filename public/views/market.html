@@ -3,7 +3,7 @@
   <br>
   <div class="row">
     <div class="card col-md-4" ng-repeat="(index, post) in posts | filter: { name: '!' + (currentUserData.displayName || 0) }">
-      <a ui-sref="skill({ id: post._id })"><img width="300" src="{{ post.image || 'http://placehold.it/300x300' }}"></a>
+      <a ui-sref="skill({ id: post._id })"><img width="300" src="{{ post.image || 'http://orig14.deviantart.net/7271/f/2014/128/8/e/featherclan_symbol_by_ariasnow-d7hoplh.png' }}"></a>
       <a ui-sref="otherProfile({ id: post.name })"><h4>{{post.name}}</h4></a>
       <p>Category: {{post.skillCategory}}</p>
       <p>Skill: {{post.skillTitle}}</p>
