@@ -24,6 +24,7 @@ a:hover{
   color: #444444;
   margin-left: 50px;
   text-decoration: none;
+  cursor: pointer;
 }
 #logo:hover{
   text-decoration: none;
