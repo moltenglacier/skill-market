@@ -49,7 +49,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     }
   }
 })
-.factory('UserService', function($rootScope, $http, BASE_URL) {
+.factory('UserService', function ($rootScope, $http, BASE_URL) {
   return {
     getUser: function(username) {
       return $http.get("/users/" + username);
@@ -93,7 +93,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $scope.skill.name = $rootScope.currentUserData.displayName;
     SkillService.postSkill($scope.skill)
     .success(function(data) {
-      swal("This post was successfully proccessed!", "success");
+      swal("Good job!", "This post was successfully proccessed!", "success");
     })
     .catch(function(error) {
       console.error(error);
@@ -102,6 +102,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $scope.logout = function() {
     console.log('logout');
     UserService.logoutCurrentUser();
+    swal("You have been logged out!", "", "error");
     $state.go("market");
   }
 })
