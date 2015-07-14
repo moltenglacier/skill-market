@@ -16,9 +16,9 @@ var app = express();
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 passport.use(new GoogleStrategy({
-  clientID: '494961005972-63p69p1nlaj674re9eotbekj96s52qrm.apps.googleusercontent.com',
-  clientSecret: 'ZAUy4L1NDkA2J8hxIXDcIdjU',
-  callbackURL: 'http://localhost:3000/auth/google/callback'},
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: '//knowledgetrader.herokuapp.com/auth/google/callback'},
   function(req, accessToken, refreshToken, profile, done){
     done(null, profile);
   }
@@ -28,7 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
