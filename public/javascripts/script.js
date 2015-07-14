@@ -113,7 +113,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $scope.skill.name = $rootScope.currentUserData.displayName;
     SkillService.postSkill($scope.skill)
     .success(function(data) {
-      alert("This post was successfully proccessed!");
+      sweetAlert("This post was successfully proccessed!");
     })
     .catch(function(error) {
       console.error(error);
@@ -184,7 +184,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   })
   .catch(function(error) {
     console.error(error);
-    alert("This user does not exist!");
+    sweetAlert("This user does not exist!");
     $state.go("market");
   })
   SkillService.getAllSkills()
@@ -209,7 +209,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   })
   .catch(function(error) {
     console.error(error);
-    alert("You are not logged in!");
+    sweetAlert("You are not logged in!");
     $state.go("market");
   })
   SkillService.getAllSkills()
@@ -231,7 +231,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     SkillService.deleteSkill(skillID)
     .success(function(data) {
       console.log("Successfully deleted skill!");
-      alert("Successfully deleted skill!");
+      sweetAlert("Successfully deleted skill!");
     })
     .catch(function(error) {
       console.error("Did not delete skill!");
@@ -243,7 +243,7 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $scope.submitPost = function(skillId, update) {
     SkillService.editSkill(skillId, update)
     .success(function(data) {
-      alert("Successfully updated skill!");
+      sweetAlert("Successfully updated skill!");
       console.log(data);
     })
     .catch(function(error) {
@@ -278,19 +278,6 @@ skill.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     })
   }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
