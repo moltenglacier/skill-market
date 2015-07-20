@@ -18,6 +18,7 @@
           <ul class="nav navbar-nav navbar-right" id="nav-links">
             <li><a ui-sref="profile({ id: profile._id })" ng-show="currentUserData.loggedIn"><i class="fa fa-user"></i> Profile</a></li>
             <li><a data-toggle="modal" data-target="#post"><i class="fa fa-plus"></i> Post</a></li>
+            <li><a href="/auth/google"><button class="btn btn-warning"><i class="fa fa-google-plus"></i></button></a></li>
             <li><a data-toggle="modal" data-target="#login" ng-hide="currentUserData.loggedIn"><i class="fa fa-sign-in"></i> Login</a></li>
             <li><a ng-click="logout()" ng-show="currentUserData.loggedIn"><i class="fa fa-sign-out"></i> Logout</a></li>
           </ul>
@@ -62,7 +63,7 @@
                     <option value="Cooking">Cooking</option>
                     <option value="Music">Music</option>
                     <option value="Sport">Sport</option>
-                    <option value="Other">Other</option>                    
+                    <option value="Other">Other</option>
                   </select>
                   <input type="text" class="form-control col-md-6" placeholder="Skill" ng-model="skill.skillTitle" required>
                   <textarea cols="30" rows="3" class="form-control" placeholder="Description of skill offered, your proficiency in the skill, and what you would like in return..." required ng-model="skill.description"></textarea>
