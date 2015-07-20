@@ -7,12 +7,13 @@ gulp.task('templates', function() {
     .pipe(ejs({}))
     .pipe(gulp.dest('./public/views'))
 });
-// gulp.task("js", function() {
-//   gulp.src("./source/javascripts/**/*.js")
-//   .pipe(concat("bundle.js"))
-//   .pipe(gulp.dest("./public/javascripts/"))
-// });
+
+gulp.task("js", function() {
+  gulp.src("./javascript/**/*.js")
+  .pipe(concat("bundle.js"))
+  .pipe(gulp.dest("./public/javascripts/"))
+});
 
 gulp.task('default', function(){
-  gulp.watch('./views/*.jade', ['templates']);
+  gulp.watch('./views/*.ejs', ['templates', 'js']);
 });

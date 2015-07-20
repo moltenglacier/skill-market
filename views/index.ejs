@@ -65,7 +65,8 @@
                     <option value="Sport">Sport</option>
                     <option value="Other">Other</option>
                   </select>
-                  <input type="text" class="form-control col-md-6" placeholder="Skill" ng-model="skill.skillTitle" required>
+                  <input type="text" class="form-control" placeholder="Skill" ng-model="skill.skillTitle" required>
+                  <input type="text" class="form-control" placeholder="Image URL" ng-model="skill.image">
                   <textarea cols="30" rows="3" class="form-control" placeholder="Description of skill offered, your proficiency in the skill, and what you would like in return..." required ng-model="skill.description"></textarea>
                 </form>
                 <div ng-hide="currentUserData.loggedIn">
@@ -88,7 +89,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="javascripts/sweetalert-dev.js"></script>
-    <script type="text/javascript" src="javascripts/script.js"></script>
+    <script type="text/javascript" src="javascripts/bundle.js"></script>
     </div>
   </body>
 </html>
