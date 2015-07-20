@@ -18,35 +18,10 @@
           <ul class="nav navbar-nav navbar-right" id="nav-links">
             <li><a ui-sref="profile({ id: profile._id })" ng-show="currentUserData.loggedIn"><i class="fa fa-user"></i> Profile</a></li>
             <li><a data-toggle="modal" data-target="#post"><i class="fa fa-plus"></i> Post</a></li>
-            <li><a href="/auth/google"><button class="btn btn-warning"><i class="fa fa-google-plus"></i></button></a></li>
-            <li><a data-toggle="modal" data-target="#login" ng-hide="currentUserData.loggedIn"><i class="fa fa-sign-in"></i> Login</a></li>
+            <li><a href="/auth/google"><i class="fa fa-google-plus"> login</i></a></li>
             <li><a ng-click="logout()" ng-show="currentUserData.loggedIn"><i class="fa fa-sign-out"></i> Logout</a></li>
           </ul>
         </nav>
-        <!-- Login Modal -->
-        <div class="modal fade" id="login" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Login</h4>
-              </div>
-              <div class="modal-body">
-                <form class="form-group">
-                  <input type="text" class="form-control" placeholder="Email" ng-model="login.email" required>
-                  <input type="password" class="form-control" placeholder="Password" ng-model="login.password">
-                </form>
-                <p>Don't have an account? <a ui-sref="signup" data-dismiss="modal" class="text-center signup">Sign Up Here</a></p>
-              </div>
-              <div class="modal-footer">
-                <a href="/auth/facebook"><button class="btn btn-primary"><i class="fa fa-facebook"></i></button></a>
-                <a href="/auth/twitter"><button class="btn btn-success"><i class="fa fa-twitter"></i></button></a>
-                <a href="/auth/google"><button class="btn btn-warning"><i class="fa fa-google-plus"></i></button></a>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="login()">Login</button>
-              </div>
-            </div>
-          </div>
-        </div>
         <!-- Create Post Modal -->
         <div class="modal fade" id="post" tabindex="-1" role="dialog">
           <div class="modal-dialog" role="document">
